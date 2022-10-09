@@ -8,7 +8,7 @@ class Users:
         self.apellido= data['apellido']
         self.email = data['email']
         self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
+        self.updated_at = data['update_at']
 
     # ahora usamos métodos de clase para consultar nuestra base de datos
     @classmethod
@@ -24,9 +24,25 @@ class Users:
         return get_usuario
 
     @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM usuarios WHERE id = %(id_usuario)s;"
+        result = connectToMySQL('Users_Schema').query_db(query,data)
+        return cls(result[0])
+
+    @classmethod
+    def delete_one(cls, data):
+        query = "DELETE FROM usuarios WHERE id = %(id_usuario)s;"
+        return connectToMySQL('Users_Schema').query_db(query,data)
+
+    @classmethod
     def save(cls, data ):
-        print("entoy en save")
-        query = "INSERT INTO usuarios ( nombre, apellido , email , created_at, updated_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
+        query = "INSERT INTO usuarios ( nombre, apellido , email , created_at, update_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
         # data es un diccionario que se pasará al método de guardar desde server.py
         return connectToMySQL('Users_Schema').query_db( query, data )
+
+    @classmethod
+    def edit_one(cls, data ):
+        query = "UPDATE INTO usuarios ( nombre, apellido , email , created_at, update_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
+        return connectToMySQL('Users_Schema').query_db( query, data )
+
 
