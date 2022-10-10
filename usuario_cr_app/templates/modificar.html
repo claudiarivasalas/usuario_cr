@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="p-3 col-6 mx-auto my-5 shadow-lg p-3 mb-5 bg-body rounded" >
-        <h1>Modificar Usuario</h1>
-        <form action="/modificar/un_usuario" method="POST">
+        <h3 class="text-center text-primary">Editar  {{un_usuario.nombre}}:</h3>
+        <form action="/modificar/{{un_usuario.id}}" method="post">
             <label for="fname">First Name:</label>
             <input type="text" name="fname" value="{{un_usuario.nombre}}">
             <label for="lname">Last Name:</label>
@@ -18,7 +18,7 @@
             <label for="email" >Email:</label>
             <input type="text" name="email"  value="{{un_usuario.email}}">
             <div class="p-3 col-6 mx-auto my-5 shadow-lg p-3 mb-5 bg-body rounded">
-                <input action="/crear"type="submit" value="Go Back">
+                <input class="mx-auto" action="/modificar/{{un_usuario.id}}" type="submit" value="Go Back">
             </div>
         </form>
     </div>

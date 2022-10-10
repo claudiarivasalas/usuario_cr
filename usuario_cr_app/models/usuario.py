@@ -42,7 +42,9 @@ class Users:
 
     @classmethod
     def edit_one(cls, data ):
-        query = "UPDATE INTO usuarios ( nombre, apellido , email , created_at, update_at ) VALUES ( %(fname)s , %(lname)s , %(email)s , NOW() , NOW() );"
+        print("edit_one")
+        query = "UPDATE usuarios SET nombre=%(fname)s, apellido=%(lname)s, email= %(email)s, created_at=NOW(), update_at=NOW()  WHERE id = %(id_usuario)s;"
         return connectToMySQL('Users_Schema').query_db( query, data )
+
 
 
